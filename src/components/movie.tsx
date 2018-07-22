@@ -49,7 +49,7 @@ type State = {
   open: boolean;
 };
 
-class Index extends React.Component<Props, State> {
+class Movie extends React.Component<Props, State> {
   state = {
     open: false,
   };
@@ -124,4 +124,4 @@ class Index extends React.Component<Props, State> {
   }
 }
 
-export default withRoot(withStyles(styles)(Index));
+export default withRoot(withStyles(styles)(Movie));

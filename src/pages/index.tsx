@@ -4,6 +4,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { fetchMovie } from '../actions';
 
+import Movie from '../components/movie';
+
 interface ReduxStateProps {
   // create a type for this eventually
   activeFilm: {
@@ -19,7 +21,7 @@ type MovieProps =
 & ReduxStateProps
 & ReduxDispatchProps;
 
-export class Movie extends React.Component<MovieProps, {}> {
+export class MoviePage extends React.Component<MovieProps, {}> {
 
 // class Movie extends React.Component {
   componentDidMount() {
@@ -52,19 +54,12 @@ export class Movie extends React.Component<MovieProps, {}> {
       // console.log(people);
 
       // tslint:disable-next-line:no-console
-      // console.log(film);
+      console.log(this.props.activeFilm);
 
       return(
-        <div className="container-fluid">
-          <div className="main">
-            <div className="row justify-content-center">
-              <div className="col-3 col-xl-4">
-                {/* <img src={src} alt={film.title} className="img-fluid poster" /> */}
-                something
-              </div>
-            </div>
-          </div>
-        </div>
+        <React.Fragment>
+          <Movie />
+        </React.Fragment>
       );
     }
 }
@@ -82,4 +77,4 @@ const mapDispatchToProps = (dispatch: any, ownProps: MovieProps): ReduxDispatchP
 });
 
 export default connect<ReduxStateProps, ReduxDispatchProps, MovieProps>
-(mapStateToProps, mapDispatchToProps)(Movie);
+(mapStateToProps, mapDispatchToProps)(MoviePage);
