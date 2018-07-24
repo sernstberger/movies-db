@@ -5,12 +5,9 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { BrowserRouter, Route, Switch  } from 'react-router-dom';
 import thunk from 'redux-thunk';
 
-import Movie from './pages/index';
+import HomePage from './pages/index';
+import MoviePage from './pages/movie';
 
-// import Header from './components/Header';
-// import Home from './components/Home';
-// import Results from './components/results';
-// import Movie from './components/movie';
 import reducers from './reducers';
 // import registerServiceWorker from './registerServiceWorker';
 
@@ -27,16 +24,17 @@ const store = createStore(reducers, compose(
 
 ReactDOM.render(
   <Provider store={store}>
-      <BrowserRouter>
+    <BrowserRouter>
 
-        {/* {<Header />  } */}
-        {/* <Index /> */}
-        
-        <Switch >
-          <Route path="/movie/:id" component={Movie} />
-        </Switch>
+      {/* {<Header />  } */}
+      {/* <Index /> */}
+      
+      <Switch >
+        <Route exact path="/" component={HomePage} />
+        <Route path="/movie/:id" component={MoviePage} />
+      </Switch>
 
-      </BrowserRouter>
+    </BrowserRouter>
   </Provider>
 , document.getElementById('root'));
 // registerServiceWorker();

@@ -11,10 +11,14 @@ import { combineReducers } from 'redux';
 // });
 
 import {
-  FETCH_MOVIE,
-  FETCH_MOVIE_SUCCESS,
-  FETCH_MOVIE_FAILURE,
-  } from '../actions';
+  FETCH_MOVIES, FETCH_MOVIES_SUCCESS, FETCH_MOVIES_FAILURE,
+  FETCH_MOVIE, FETCH_MOVIE_SUCCESS, FETCH_MOVIE_FAILURE,
+  // FETCH_STAR_SUCCESS, FETCH_STAR_FAILURE,
+  // FETCH_CASTS, FETCH_CASTS_SUCCESS, FETCH_CASTS_FAILURE,
+  // FETCH_TRAILERS, FETCH_TRAILERS_SUCCESS, FETCH_TRAILERS_FAILURE,
+  // SEARCH_MOVIE, SEARCH_MOVIE_SUCCESS, SEARCH_MOVIE_FAILURE,
+  // ENTER_SEARCH_TEXT
+} from '../actions';
 
 // export default rootReducer;
 
@@ -32,26 +36,6 @@ const defaultState = {
   item: {},
   error: {}
 };
-
-// const mainReducer = (state = defaultState, action: any) => {
-//   if (action.type === 'FETCH_MOVIE') {
-//     // tslint:disable-next-line:no-console
-//     console.log('yepppp');
-//     return{
-//       // ...state,
-//       movie: {
-//         title: action.title,
-//         overview: action.overview
-//       }
-//     };
-//   } else {
-//       // tslint:disable-next-line:no-console
-//       console.log('nope');
-//       return {
-//         ...state
-//       };
-//   }
-// };
 
 const movieDetail = (state = defaultState, action: any) => {
   switch (action.type) {
@@ -74,8 +58,22 @@ const movieDetail = (state = defaultState, action: any) => {
   }
 };
 
+const movieList = (state = defaultState, action: any) => {
+  switch (action.type) {
+    case FETCH_MOVIES:
+      return {...state, isFetching: true};
+    case FETCH_MOVIES_SUCCESS:
+      return {...state, isFetching: false, items: action.data};
+    case FETCH_MOVIES_FAILURE:
+      return {...state, isFetching: false, error: action.data};
+
+    default:
+      return state;
+  }
+};
+
 const mainReducer = combineReducers({
-  // movieList,
+  movieList,
   // castList,
   // trailerList,
   movieDetail,
