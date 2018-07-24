@@ -2,7 +2,7 @@ import * as React from 'react';
 
 // import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchMovie } from '../actions';
+import { fetchMovieDetail } from '../actions';
 
 import Movie from '../components/movie';
 
@@ -67,13 +67,13 @@ export class MoviePage extends React.Component<MovieProps, {}> {
 // state needs typings
 const mapStateToProps = (state: any) => {
   return {
-    activeFilm: state.activeFilm,
+    activeFilm: state.movieDetail,
   };
 };
 
 // Dispatch not working in current react-redux, so using any, but should be changed
 const mapDispatchToProps = (dispatch: any, ownProps: MovieProps): ReduxDispatchProps => ({
-  FooOnYou: (id: number) => dispatch(fetchMovie(id)),
+  FooOnYou: (id: number) => dispatch(fetchMovieDetail(id)),
 });
 
 export default connect<ReduxStateProps, ReduxDispatchProps, MovieProps>
