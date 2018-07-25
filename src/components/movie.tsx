@@ -2,8 +2,12 @@ import * as React from 'react';
 
 // import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
+import Chip from '@material-ui/core/Chip';
+import grey from '@material-ui/core/colors/grey';
 import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
+import Hidden from '@material-ui/core/Hidden';
+import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 import ContentCard from '../components/ContentCard';
@@ -15,9 +19,6 @@ import withRoot from '../withRoot';
 
 const styles = (theme: Theme) => createStyles({
   root: {
-    // textAlign: 'center',
-    // paddingTop: theme.spacing.unit * 20,
-
     display: 'flex',
     flexWrap: 'wrap',
     width: '100%',
@@ -25,29 +26,81 @@ const styles = (theme: Theme) => createStyles({
     minHeight: '100%',
   },
 
-  // sidebar: {
-  //   backgroundColor: '#fff',
-  //   display: 'flex',
-  //   width: 400,
-
-  //   flexGrow: 0,
-  //   // flex: 1,
-  // },
-
   media: {
     height: 0,
     paddingTop: '56.25%',
     // maxHeight: 450,
     // maxWidth: 300,
+
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: '46.25%',
+    },
+
+    [theme.breakpoints.up('md')]: {
+      paddingTop: '36.25%',
+    }
+  },
+
+  posterWrapper: {
+    bottom: -225,
+    left: 16,
+    position: 'absolute',
+
+    [theme.breakpoints.down('sm')]: {
+      bottom: -25,
+      // height: 200,
+      width: 100,
+    }
+  },
+
+  posterImage: {
+    display: 'block',
+    width: '100%',
+  },
+
+  details: {
+    padding: '32px 16px',
+
+    [theme.breakpoints.up('md')]: {
+      // padding: 0,
+      paddingLeft: 350
+    },
+
+    [theme.breakpoints.only('lg')]: {
+      // padding: 0,
+      paddingRight: 200
+    },
+
+    [theme.breakpoints.only('xl')]: {
+      // padding: 0,
+      paddingRight: 350
+    }
   },
   
   main: {
-    backgroundColor: '#efe9e8',
+    // backgroundColor: '#efe9e8',
     display: 'flex',
     // width: 500,
 
     // flexGrow: 0,
     flex: 1,
+  },
+
+  title: {
+    color: grey[900],
+    fontStyle: 'italic',
+    fontWeight: 900,
+  },
+
+  card: {
+    backgroundColor: 'transparent',
+    border: 'none',
+    overflow: 'visible',
+    width: '100%',
+
+    '&:hover': {
+      boxShadow: 'none',
+    }
   }
 });
 
@@ -88,91 +141,79 @@ class Movie extends React.Component<Props, State> {
     // tslint:disable-next-line:no-console
     console.log('ahh', this.props.releaseDate);
     return (
-      <div>
-        <div className={this.props.classes.root}>
-          {/* <div className={this.props.classes.sidebar}>
-            <div>
-              <img src={`https://image.tmdb.org/t/p/original${this.props.poster}`} style={{maxWidth: '100%'}} />
+      <div className={this.props.classes.main}>
+        <Grid container spacing={16} justify="center">
+          <Grid item xs={12}>
+            <Grid container>
+              <Card className={this.props.classes.card}>
+                <div style={{position: 'relative'}}>
+                  {/* <Button>View all</Button> */}
+                  <CardMedia
+                    className={this.props.classes.media}
+                    image={`https://image.tmdb.org/t/p/original${this.props.backdrop}`}
+                  />
+                  <Paper elevation={10} className={this.props.classes.posterWrapper}>
+                    <img src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${this.props.poster}`} className={this.props.classes.posterImage}/>
+                  </Paper>
+                </div>
+                <div className={this.props.classes.details}>
+                  <Hidden mdUp>
+                    <Typography variant="display1" className={this.props.classes.title}>{this.props.title}</Typography>
+                    <Typography variant="headline" color="textSecondary">{this.props.tagline}</Typography>
+                  </Hidden>
+                  <Hidden smDown>
+                    <Typography variant="display2" className={this.props.classes.title}>{this.props.title}</Typography>
+                    <Typography variant="display1" color="textSecondary">{this.props.tagline}</Typography>
+                  </Hidden>
 
-              <Typography variant="display1" gutterBottom>{this.props.title}</Typography>
-              {this.props.tagline}
+                  <Typography variant="title" style={{marginTop: 20}}>Storyline</Typography>
+                  <Typography variant="subheading" gutterBottom>{this.props.overview}</Typography>
 
-              Category
-              {this.props.genres && this.props.genres.map((genre: any, i: number) => {
-                return (
-                  <div key={i}>
-                    {genre.name}
-                  </div>
-                );
-              })}
-
-              Release date
-              {this.props.releaseDate}
-
-              <hr />
-
-              Director
-
-              Writer
-
-              <hr />
-              Runtime
-              {this.props.runtime}
-              
-            </div> */}
-          {/* </div> */}
-          <div className={this.props.classes.main}>
-            <Grid container spacing={16} justify="center">
-              <Grid item xs={12} md={11}>
-                <Grid container>
-                  <Card style={{width: '100%'}}>
-                    <div style={{position: 'relative'}}>
-                      <CardMedia
-                        className={this.props.classes.media}
-                        image={`https://image.tmdb.org/t/p/original${this.props.backdrop}`}
-                        // title={this.props.title}
-                      />
-
-                      <img src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${this.props.poster}`} style={{bottom: 225, position: 'absolute'}} />
-                    </div>
-
-                    <Typography variant="display1" gutterBottom>{this.props.title}</Typography>
-                    <i>{this.props.tagline}</i>
-
-                    <Typography variant="display1" gutterBottom>Storyline</Typography>
-                    {this.props.overview}
-                  </Card>
-                  
-                  <Grid item xs={12}>
-                    cast
-                    <Grid container spacing={32}>
-                      {this.props.credits && this.props.credits.cast.slice(0, 12).map((person: any, i: number) => {
+                  <Grid container>
+                    <Grid item xs={12} sm={4} style={{marginTop: 20}}>
+                      <Typography variant="title" gutterBottom>Runtime</Typography>
+                      <Typography>{this.props.runtime} minutes</Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={4} style={{marginTop: 20}}>
+                      <Typography variant="title" gutterBottom>Release date</Typography>
+                      <Typography>{this.props.releaseDate}</Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={4} style={{marginTop: 20}}>
+                      <Typography variant="title" gutterBottom>Category</Typography>
+                      {this.props.genres && this.props.genres.map((genre: any, i: number) => {
                         return (
-                          <Grid item xs={3} sm={2} key={i}>
-                            <ContentCard
-                              title={person.name}
-                              subtitle={person.character}
-                              // link={`/movie/${thing.id}`}
-                              link={`/${person.id}`}
-                              poster={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${person.profile_path}`}
-                            />
-                          </Grid>
+                          <Chip 
+                            key={i}
+                            label={genre.name}
+                          />
                         );
                       })}
                     </Grid>
-
-                    <hr />
-
-                    photos
-
-                    video
                   </Grid>
-                </Grid>
-              </Grid>
+                  
+                  <Typography variant="title" gutterBottom style={{marginTop: 20}}>Cast</Typography>
+                  <Grid container spacing={32}>
+                    {this.props.credits && this.props.credits.cast.slice(0, 6).map((person: any, i: number) => {
+                      return (
+                        <Grid item xs={4} sm={2} key={i}>
+                          <ContentCard
+                            title={person.name}
+                            subtitle={person.character}
+                            // link={`/${person.id}`}
+                            link={`#`}
+                            poster={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${person.profile_path}`}
+                          />
+                        </Grid>
+                      );
+                    })}
+                  </Grid>
+                  {/* videos section */}
+                </div>
+              </Card>
             </Grid>
+          </Grid>
+        </Grid>
 
-          </div>
-        </div>
       </div>
     );
   }

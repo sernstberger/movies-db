@@ -2,9 +2,6 @@ import * as React from 'react';
 
 import { Link } from 'react-router-dom';
 
-// import Card from '@material-ui/core/Card';
-// import CardMedia from '@material-ui/core/CardMedia';
-// import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -16,15 +13,24 @@ import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 import withRoot from '../withRoot';
 
 const styles = (theme: Theme) => createStyles({
-  // root: {
-  //   // display: 'flex',
-  //   // flexWrap: 'wrap',
-  //   transition: '250ms all',
+  logo: {
+    backgroundColor: theme.palette.primary.main,
+    color: '#000',
+    marginLeft: -24,
+    overflow: 'hidden',
+    padding: '20px 40px',
+    textDecoration: 'none',
+    
+    '& h2': {
+      transition: '250ms all',
+    },
 
-  //   '&:hover': {
-  //     transform: 'scale(1.05)',
-  //   },
-  // },
+    '&:hover': {
+      '& h2': {
+        transform: 'scale(1.1)',
+      }
+    },
+  },
 });
 
 interface Props extends WithStyles<typeof styles> {
@@ -32,40 +38,27 @@ interface Props extends WithStyles<typeof styles> {
 }
 
 class Layout extends React.Component<Props, {}> {
-
-  handleClose = () => {
-    this.setState({
-      open: false,
-    });
-  };
-
-  handleClick = () => {
-    this.setState({
-      open: true,
-    });
-  };
-
   render() {
-    // tslint:disable-next-line:no-console
-    // console.log('ahh', this.props.releaseDate);
-
     return (
-      <div>
-        <AppBar position="static" color="default">
+      <div style={{ padding: 16 }}>
+        <AppBar position="fixed" color="default" elevation={1}>
           <Toolbar>
-            <Link to="/">
+            <Link to="/" className={this.props.classes.logo}>
               <Typography variant="title" color="inherit">
                 Cineplex
               </Typography>
             </Link>
           </Toolbar>
         </AppBar>
-        <Grid container justify="center" style={{ padding: 16 }}>
-          <Grid item xs={12} lg={11} xl={10}>
+        <Grid container spacing={32} justify="center" style={{ paddingTop: 70 }}>
+          <Grid item xs={12}>
             {this.props.children}
           </Grid>
         </Grid>
-        footer
+        <div style={{marginTop: 50, textAlign: 'center'}}>
+          <Typography>Created by Steve Ernstberger.</Typography>
+          <Typography>This product uses the TMDb API but is not endorsed or certified by TMDb.</Typography>
+        </div>
       </div>
     );
   }

@@ -13,8 +13,7 @@ import withRoot from '../withRoot';
 
 const styles = (theme: Theme) => createStyles({
   root: {
-    // display: 'flex',
-    // flexWrap: 'wrap',
+    marginBottom: 30,
     transition: '250ms all',
 
     '&:hover': {
@@ -30,8 +29,12 @@ const styles = (theme: Theme) => createStyles({
   media: {
     height: 0,
     paddingTop: '150%',
-    // maxHeight: 450,
-    // maxWidth: 300,
+  },
+
+  title: {
+    marginBottom: 5,
+    marginTop: 10,
+    lineHeight: 1.25,
   }
 });
 
@@ -57,14 +60,9 @@ class ContentCard extends React.Component<Props, {}> {
   };
 
   render() {
-    // tslint:disable-next-line:no-console
-    // console.log('ahh', this.props.releaseDate);
-
-    // const MyLink = (props: any) => <Link to={this.props.link} className={this.props.classes.link} {...props} />;
-
     return (
       <div className={this.props.classes.root}>
-        <Link to={this.props.link} className={this.props.classes.link} >
+        <Link to={this.props.link} className={this.props.classes.link}>
           <Card>
             <CardMedia
               className={this.props.classes.media}
@@ -72,8 +70,8 @@ class ContentCard extends React.Component<Props, {}> {
               title={this.props.title}
             />
           </Card>
-          <Typography variant="subheading" gutterBottom align="center">{this.props.title}</Typography>
-          {this.props.subtitle && <Typography variant="body1" gutterBottom align="center">{this.props.subtitle}</Typography>}
+          <Typography variant="body2" align="center" className={this.props.classes.title}>{this.props.title}</Typography>
+          {this.props.subtitle && <Typography variant="caption" align="center">{this.props.subtitle}</Typography>}
         </Link>
       </div>
     );

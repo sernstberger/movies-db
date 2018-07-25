@@ -11,6 +11,8 @@ const sansSerifFont = '"Montserrat","-apple-system,system-ui,BlinkMacSystemFont"
 // It's optional.
 const theme = createMuiTheme({
   palette: {
+    // type: 'dark',
+
     primary: {
       main: '#ffad01',
     },
@@ -34,12 +36,12 @@ const theme = createMuiTheme({
 
     MuiChip: {
       root: {
-        backgroundColor: '#008489',
-        borderRadius: 4,
-        color: '#fff',
+        backgroundColor: 'transparent',
+        border: `2px solid ${grey[700]}`,
+        borderRadius: 0,
+        marginRight: 5,
         // padding: 2,
-        height: 20,
-        textTransform: 'uppercase',
+        // textTransform: 'uppercase',
       },
       label: {
         fontSize: '.75rem',
@@ -54,22 +56,25 @@ const theme = createMuiTheme({
     fontFamily: sansSerifFont,
     // fontSize: 10,
     display4: {
-      color: '#000',
+      color: grey[900],
       fontStyle: 'italic',
       fontWeight: 900,
     },
-    // display3: {
+    display3: {
+      color: grey[900],
     //   fontFamily: serifFont,
     //   fontWeight: 700,
-    // },
-    // display2: {
-    //   fontFamily: serifFont,
-    //   fontWeight: 700,
-    // },
-    // display1: {
-    //   fontFamily: serifFont,
-    //   fontWeight: 700,
-    // },
+    },
+    display2: {
+      color: grey[900],
+      fontStyle: 'italic',
+      fontWeight: 900,
+    },
+    display1: {
+      color: grey[900],
+      fontStyle: 'italic',
+      fontWeight: 900,
+    },
     // headline: {
     //   fontFamily: serifFont,
     //   fontWeight: 700,
@@ -78,6 +83,11 @@ const theme = createMuiTheme({
     //     fontSize: '1rem',
     //   },
     // },
+    title: {
+      color: grey[700],
+      fontStyle: 'italic',
+      fontWeight: 900,
+    },
     // body2: {
     //   color: grey[600],
     //   fontSize: '.8125rem',

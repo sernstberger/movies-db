@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { fetchMoviesList } from '../actions';
 
 import Grid from '@material-ui/core/Grid';
+import Hidden from '@material-ui/core/Hidden';
 
 import ContentCard from '../components/ContentCard';
 import PageLayout from '../components/PageLayout';
@@ -40,11 +41,16 @@ class HomePage extends React.Component<HomeProps, {}> {
       return(
         <React.Fragment>
           <PageLayout>
-            <Grid container justify="center">
-              <Grid item xl={10}>
-                <Grid container spacing={32}>
+            <Grid container spacing={16} justify="center">
+              <Grid item xs={12} xl={10}>
+                <Grid container spacing={16}>
                   <Grid item xs={12}>
-                    <Typography variant="display4">Popular</Typography>
+                    <Hidden smDown>
+                      <Typography variant="display4">Popular</Typography>
+                    </Hidden>
+                    <Hidden mdUp>
+                      <Typography variant="display1">Popular</Typography>
+                    </Hidden>
                   </Grid>
                   {this.props.listOfThings && this.props.listOfThings.results.map( (thing: any, i: number) => {
                     return <Grid item xs={3} sm={2} key={i}>
