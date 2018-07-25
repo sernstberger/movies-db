@@ -15,8 +15,16 @@ const styles = (theme: Theme) => createStyles({
   root: {
     // display: 'flex',
     // flexWrap: 'wrap',
-    // maxHeight: 450,
-    // maxWidth: 300,
+    transition: '250ms all',
+
+    '&:hover': {
+      transform: 'scale(1.05)',
+    },
+  },
+
+  link: {
+    display: 'block',
+    textDecoration: 'none',
   },
 
   media: {
@@ -29,6 +37,7 @@ const styles = (theme: Theme) => createStyles({
 
 interface Props extends WithStyles<typeof styles> {
   title: string;
+  subtitle?: string;
   poster: string;
   link: string;
 }
@@ -51,18 +60,21 @@ class ContentCard extends React.Component<Props, {}> {
     // tslint:disable-next-line:no-console
     // console.log('ahh', this.props.releaseDate);
 
-    const MyLink = (props: any) => <Link to={this.props.link} {...props} />;
+    // const MyLink = (props: any) => <Link to={this.props.link} className={this.props.classes.link} {...props} />;
 
     return (
-      <div>
-        <Card className={this.props.classes.root} component={MyLink}>
-          <CardMedia
-            className={this.props.classes.media}
-            image={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${this.props.poster}`}
-            title="Contemplative Reptile"
-          />
-        </Card>
-        <Typography variant="headline" gutterBottom>{this.props.title}</Typography>
+      <div className={this.props.classes.root}>
+        <Link to={this.props.link} className={this.props.classes.link} >
+          <Card>
+            <CardMedia
+              className={this.props.classes.media}
+              image={this.props.poster}
+              title={this.props.title}
+            />
+          </Card>
+          <Typography variant="subheading" gutterBottom align="center">{this.props.title}</Typography>
+          {this.props.subtitle && <Typography variant="body1" gutterBottom align="center">{this.props.subtitle}</Typography>}
+        </Link>
       </div>
     );
   }

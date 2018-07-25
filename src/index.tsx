@@ -20,21 +20,16 @@ const store = createStore(reducers, compose(
   window.devToolsExtension ? window.devToolsExtension() : (f: any) => f
 ));
 
-// const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
-
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-
-      {/* {<Header />  } */}
-      {/* <Index /> */}
-      
-      <Switch >
-        <Route exact path="/" component={HomePage} />
-        <Route path="/movie/:id" component={MoviePage} />
-      </Switch>
-
-    </BrowserRouter>
+    <div>
+      <BrowserRouter>
+        <Switch >
+          <Route exact path="/" component={HomePage} />
+          <Route path="/movie/:id" component={MoviePage} />
+        </Switch>
+      </BrowserRouter>
+    </div>
   </Provider>
 , document.getElementById('root'));
 // registerServiceWorker();

@@ -7,6 +7,8 @@ import { fetchMoviesList } from '../actions';
 import Grid from '@material-ui/core/Grid';
 
 import ContentCard from '../components/ContentCard';
+import PageLayout from '../components/PageLayout';
+import Typography from '../../node_modules/@material-ui/core/Typography';
 
 interface ReduxStateProps {
   // create a type for this eventually
@@ -37,21 +39,26 @@ class HomePage extends React.Component<HomeProps, {}> {
 
       return(
         <React.Fragment>
-          <Grid container justify="center">
-            <Grid item xl={10}>
-              <Grid container spacing={32}>
-                {this.props.listOfThings && this.props.listOfThings.results.map( (thing: any, i: number) => {
-                  return <Grid item xs={4} sm={3} xl={2} key={i}>
-                    <ContentCard
-                      title={thing.title}
-                      link={`/movie/${thing.id}`}
-                      poster={thing.poster_path}
-                    />
-                  </Grid>;
-                })}
+          <PageLayout>
+            <Grid container justify="center">
+              <Grid item xl={10}>
+                <Grid container spacing={32}>
+                  <Grid item xs={12}>
+                    <Typography variant="display4">Popular</Typography>
+                  </Grid>
+                  {this.props.listOfThings && this.props.listOfThings.results.map( (thing: any, i: number) => {
+                    return <Grid item xs={3} sm={2} key={i}>
+                      <ContentCard
+                        title={thing.title}
+                        link={`/movie/${thing.id}`}
+                        poster={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${thing.poster_path}`}
+                      />
+                    </Grid>;
+                  })}
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
+          </PageLayout>
         </React.Fragment>
       );
     }

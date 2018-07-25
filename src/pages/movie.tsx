@@ -7,12 +7,15 @@ import { connect } from 'react-redux';
 import { fetchMovieDetail } from '../actions';
 
 import Movie from '../components/movie';
+import PageLayout from '../components/PageLayout';
 
 interface ReduxStateProps {
   // create a type for this eventually
   activeFilm: {
     title: string;
+    tagline: string;
     poster_path: string;
+    backdrop_path: string;
     overview: string;
     credits: {
       cast: any;
@@ -63,17 +66,19 @@ class MoviePage extends React.Component<MovieProps, {}> {
       console.log('fooooo', this.props);
 
       return(
-        <React.Fragment>
+        <PageLayout>
           <Movie
             title={this.props.activeFilm.title}
+            tagline={this.props.activeFilm.tagline}
             poster={this.props.activeFilm.poster_path}
+            backdrop={this.props.activeFilm.backdrop_path}
             overview={this.props.activeFilm.overview}
             credits={this.props.activeFilm.credits}
             genres={this.props.activeFilm.genres}
             releaseDate={this.props.activeFilm.release_date}
             runtime={this.props.activeFilm.runtime}
           />
-        </React.Fragment>
+        </PageLayout>
       );
     }
 }
